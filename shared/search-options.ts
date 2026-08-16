@@ -5,8 +5,8 @@ type SearchFetchOptions = {
   watch: false | [Ref<string>]
 }
 
-// 意図的なバグ: reactiveなqueryの変更による再取得を止めている。
+// reactiveなqueryの変更をuseFetchの自動再取得へ伝える。
 export const createSearchFetchOptions = (keyword: Ref<string>): SearchFetchOptions => ({
   query: { q: keyword },
-  watch: false,
+  watch: [keyword],
 })
